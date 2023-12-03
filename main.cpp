@@ -3,6 +3,7 @@
 //
 
 const char LEDPins[5] = {'A5', 'A4', 'A3', 'A2', 'A1'};
+const int buzzerPin = 7;
 
 enum DSTATE {INIT, DG1, DG2, DG3, DG4, DG5, RG} driveState = INIT;
 enum ALARM {OFF, ON} maxRPM = OFF;
@@ -18,6 +19,14 @@ void offLEDs(){
   for(char pin : LEDPins){
     digitalWrite(pin, LOW);
   }
+}
+
+void onBuzzer(){
+  tone(buzzerPin, 200, 1000);
+}
+
+void offBuzzer(){
+  noTone(buzzerPin);
 }
 
 void tick(void) {
@@ -97,18 +106,23 @@ void tick(void) {
 }
 
 void setup(){
-  
+
   // LED Setup
   for(char pin : LEDPins){
     pinMode(pin, OUTPUT);
   }
   
   // Buzzer Setup
-
+  pinMode(buzzerPin, OUTPUT);
 }
 
 void loop(){
 
   onLEDs();
+  onBuzzer();
+  delay(200);
+  offLEDs();
+  offBuzzer();
+  delay(200);
 
 }
