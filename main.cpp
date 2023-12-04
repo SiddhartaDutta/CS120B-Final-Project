@@ -8,6 +8,7 @@ const char LEDPins[] = {'A5', 'A4', 'A3', 'A2', 'A1'};
 // Buzzer Pin
 const int buzzerPin = 7;
 
+#pragma region LEDDisplayJunk
 /*
     comm        SYMBOL  BINARY-MASK DECIMAL HEXA
  g f | a b        0     11111100    252     0xFC 
@@ -26,6 +27,7 @@ const int buzzerPin = 7;
     comm  
 */
 // From: https://www.tinkercad.com/embed/89liBdhK3we?editbtn=1
+#pragma endregion
 
 // TINKERCAD MODEL: Cathode (Connected to negative rail)
 // LED Pin Array:      a,  b, c, d, e,  f,  g, dp
@@ -34,8 +36,7 @@ byte digits[] = {0xFC, 0x60, 0xDA, 0xF2, 0x66, 0xB6, 0xBE, 0xE0, 0xFE, 0xF6};
 
 enum DSTATE {INIT, DG1, DG2, DG3, DG4, DG5, RG} driveState = INIT;
 enum ALARM {OFF, ON} maxRPM = OFF;
-char shiftUpBtn = 0, shiftDownBtn = 0, ledCount = 0, throttle = 0, gear = 0, gearRec = 0;
-//char shiftUpBtn = shiftDownBtn = ledCount = throttle = gear = gearRec = gearUpFlag = gearDownFlag = 0;
+char shiftUpBtn = 0, shiftDownBtn = 0, ledCount = 0, throttle = 0, gear = 0, gearRec = 0, gearUpFlag = 0, gearDownFlag = 0;
 
 #pragma region OPRFUNCS
 
@@ -164,12 +165,12 @@ void setup(){
 void loop(){
 
   onLEDs();
-  onBuzzer();
-  displayDigit(5);
-  delay(500);
+  //onBuzzer();
+  //displayDigit(5);
+  delay(1000);
   offLEDs();
-  offBuzzer();
-  displayDigit(8);
-  delay(200);
+  //offBuzzer();
+  //displayDigit(8);
+  delay(1000);
 
 }
